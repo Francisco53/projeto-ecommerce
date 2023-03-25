@@ -18,6 +18,9 @@ public class Venda {
     @JoinColumn(name = "venda_id")
     private List<ItemVenda> itemVendas = new ArrayList<>();
 
+    @ManyToOne
+    private Pessoa pessoa;
+
 
     public Venda(){
 
@@ -45,6 +48,14 @@ public class Venda {
 
     public void setData(LocalDate data) {
         this.data = data;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
     public List<ItemVenda> getItemVendas() {
