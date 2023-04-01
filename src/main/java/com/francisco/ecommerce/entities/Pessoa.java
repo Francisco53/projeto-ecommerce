@@ -12,7 +12,10 @@ public abstract class Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
+
+    private String email;
+
+    private String telefone;
 
     @OneToMany
     @JoinColumn(name = "pessoa_id")
@@ -22,9 +25,10 @@ public abstract class Pessoa {
 
     }
 
-    public Pessoa(Long id, String nome) {
+    public Pessoa(Long id, String email, String telefone) {
         this.id = id;
-        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
     }
 
     public Long getId() {
@@ -35,11 +39,23 @@ public abstract class Pessoa {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getEmail() {
+        return email;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public List<Venda> getVendas() {
+        return vendas;
     }
 }

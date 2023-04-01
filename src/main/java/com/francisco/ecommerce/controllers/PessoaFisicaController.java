@@ -15,7 +15,7 @@ import java.util.List;
 
 @Transactional
 @Controller
-@RequestMapping("pessoas")
+@RequestMapping("pessoasFisicas")
 public class PessoaFisicaController {
 
     @Autowired
@@ -25,36 +25,36 @@ public class PessoaFisicaController {
     public String listar(Model model){
         List<PessoaFisica> pessoaFisicas = repository.pessoaFisicas();
         model.addAttribute("pessoas", pessoaFisicas);
-        return "/pessoaFisica/list";
+        return "/pessoaFisica/list-pessoa-fisica";
     }
 
     @GetMapping("/form")
     public String form(PessoaFisica pessoaFisica){
-        return "pessoaFisica/form";
+        return "/pessoaFisica/form";
     }
 
     @PostMapping("/save")
     public ModelAndView salvar(PessoaFisica pessoaFisica) {
         repository.salvar(pessoaFisica);
-        return new ModelAndView("redirect:/pessoas/list");
+        return new ModelAndView("redirect:/pessoasFisicas/list");
     }
 
     @GetMapping("/remove/{id}")
     public ModelAndView remove(@PathVariable("id") Long id){
         repository.remove(id);
-        return new ModelAndView("redirect:/pessoas/list");
+        return new ModelAndView("redirect:/pessoasFisicas/list");
     }
 
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable("id") Long id, ModelMap model) {
-        model.addAttribute("pessoa", repository.pessoaFisica(id));
+        model.addAttribute("pessoaFisica", repository.pessoaFisica(id));
         return new ModelAndView("/pessoaFisica/form", model);
     }
 
     @PostMapping("/update")
     public ModelAndView update(PessoaFisica pessoaFisica) {
         repository.update(pessoaFisica);
-        return new ModelAndView("redirect:/pessoas/list");
+        return new ModelAndView("redirect:/pessoasFisicas/list");
     }
 
 }

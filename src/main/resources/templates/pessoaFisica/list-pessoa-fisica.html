@@ -17,23 +17,28 @@
         <th>Id</th>
         <th>Nome</th>
         <th>CPF</th>
+        <th>E-mail</th>
+        <th>Telefone</th>
         <th colspan="2">Opções</th>
     </tr>
     <h1 style="text-align:center">Pessoas Físicas</h1>
 
     </thead>
-    <tr th:each="p : ${pessoas}">
+    <tr th:each="p : ${pessoas}" th:object="${pessoaFisica}">
         <td th:text="${p.id}"> </td>
         <td th:text="${p.nome}"></td>
         <td th:text="${p.cpf}"></td>
-        <td> <a th:href="@{/pessoas/edit/{id}(id=${p.id})}">Editar</a> </td>
+        <td th:text="${p.email}"></td>
+        <td th:text="${p.telefone}"></td>
+        <td> <a th:href="@{/pessoasFisicas/edit/{id}(id=${p.id})}">Editar</a> </td>
         <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"
-                th:href="@{/pessoas/remove/{id}(id=${p.id})}">Excluir</a> </td>
+                th:href="@{/pessoasFisicas/remove/{id}(id=${p.id})}">Excluir</a> </td>
     </tr>
 </table>
+    <a th:href="@{/home}" class="btn btn-info">Voltar</a>
+    <a th:href="@{/pessoasFisicas/form}" class="btn btn-primary">Form</a>
 </div>
-</body>
-</html>
 
 </body>
 </html>
+

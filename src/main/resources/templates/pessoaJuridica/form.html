@@ -12,11 +12,11 @@
 
 <div class="container-fluid text-center my-4">
     <h1 class="text-center">Cadastro</h1>
-    <form th:action="${pessoaFisica.id == null} ? @{/pessoasFisicas/save} : @{/pessoasFisicas/update}" th:object="${pessoaFisica}" method="post" >
+    <form th:action="${pessoaJuridica.id == null} ? @{/pessoasJuridicas/save} : @{/pessoasJuridicas/update}" th:object="${pessoaJuridica}" method="post" >
        <input type="hidden" th:field="*{id}">
         <!--<input type="text" th:field="*{tipo}" value="F" placeholder="Pessoa" class="my-2" style="min-width:25%;">-->
-        <input type="text" th:field="*{nome}"  placeholder="Nome" class="my-2" style="min-width:25%;"><br>
-        <input type="text" th:field="*{cpf}" value="F" placeholder="CPF" class="my-2" style="min-width:25%;"><br>
+        <input type="text" th:field="*{razaoSocial}"  placeholder="Razão Social" class="my-2" style="min-width:25%;"><br>
+        <input type="text" th:field="*{cnpj}" value="J" placeholder="CNPJ" class="my-2" style="min-width:25%;"><br>
         <input type="text" th:field="*{email}"  placeholder="Email" class="my-2" style="min-width:25%;"><br>
         <input type="text" th:field="*{telefone}"  placeholder="Telefone" class="my-2" style="min-width:25%;">
         <!--<input type="radio" id="F" name="tipo" class="form-check-input"  checked>-->
