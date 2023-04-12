@@ -4,6 +4,7 @@ import com.francisco.ecommerce.entities.Produto;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import org.springframework.context.annotation.EnableMBeanExport;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -35,4 +36,12 @@ public class ProdutoRepository {
     public void update(Produto produto){
         em.merge(produto);
     }
+
+    public List<Produto> findProdutoByNme(String nome) {
+        Query query = em.createQuery("SELECT p FROM Produto p WHERE p.nome = :nome");
+        query.setParameter("nome", nome);
+        return query.getResultList();
+    }
+
+
 }

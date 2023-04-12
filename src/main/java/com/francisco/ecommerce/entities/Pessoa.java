@@ -21,6 +21,8 @@ public abstract class Pessoa {
     @JoinColumn(name = "pessoa_id")
     private List<Venda> vendas  = new ArrayList<>();
 
+
+
     public Pessoa() {
 
     }
