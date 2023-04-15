@@ -57,20 +57,11 @@ public class ProdutoController {
         return new ModelAndView("redirect:/produtos/list");
     }
 
-    /*@PostMapping("/pesquisarproduto")
-    public ModelAndView pesquisar(@RequestParam("nomepesquisa") String nomepesquisa) {
-        ModelAndView modelAndView = new ModelAndView("produtos/form");
-        List<Produto> produtos = repository.findProdutoByNme(nomepesquisa);
-        modelAndView.addObject("produtos", produtos);
-        return modelAndView;
-    }*/
-
-    @PostMapping("/pesquisarproduto")
-    public ModelAndView pesquisarProduto(@RequestParam("nomepesquisa") String nomepesquisa) {
-        List<Produto> produtos = repository.findProdutoByNme(nomepesquisa);
-        ModelAndView modelAndView = new ModelAndView("produtos/form");
-        modelAndView.addObject("produtos", produtos);
-        return modelAndView;
+    @GetMapping("/pesquisarproduto")
+    public ModelAndView pesquisarProduto(@RequestParam("nomepesquisa") String nomepesquisa, ModelMap model) {
+        List<Produto> produtos = repository.findProdutoByNome(nomepesquisa.toUpperCase());
+        model.addAttribute("produtos",produtos);
+        return new ModelAndView("/produtos/list",model);
     }
 
 

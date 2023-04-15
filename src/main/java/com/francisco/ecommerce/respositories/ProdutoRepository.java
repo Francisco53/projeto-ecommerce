@@ -37,9 +37,9 @@ public class ProdutoRepository {
         em.merge(produto);
     }
 
-    public List<Produto> findProdutoByNme(String nome) {
-        Query query = em.createQuery("SELECT p FROM Produto p WHERE p.nome = :nome");
-        query.setParameter("nome", nome);
+    public List<Produto> findProdutoByNome(String nome) {
+        Query query = em.createQuery("SELECT p FROM Produto p WHERE p.descricao like :nomepesquisa");
+        query.setParameter("nomepesquisa", "%"+nome+"%");
         return query.getResultList();
     }
 

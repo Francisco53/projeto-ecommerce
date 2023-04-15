@@ -18,35 +18,6 @@
 <br>
 <br>
 
-<form th:action="@{/pesquisarproduto}" method="post">
-  <label for="nomepesquisa">Pesquisar produto:</label>
-  <input type="text" id="nomepesquisa" name="nomepesquisa">
-  <button type="submit">Buscar</button>
-</form>
-<div th:if="${not #lists.isEmpty(produtos)}">
-  <h2>Produtos encontrados:</h2>
-  <table>
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nome</th>
-      <th>Preço</th>
-      <th>Descrição</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="produto : ${produtos}">
-      <td th:text="${produto.id}"></td>
-      <td th:text="${produto.nome}"></td>
-      <td th:text="${produto.preco}"></td>
-      <td th:text="${produto.descricao}"></td>
-    </tr>
-    </tbody>
-  </table>
-</div>
-
-
-
 
 </body>
 </html>

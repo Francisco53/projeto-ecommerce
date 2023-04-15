@@ -6,6 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+
+
+<form th:action="@{/produtos/pesquisarproduto}" method="get">
+  <label for="nomepesquisa">Pesquisar produto:</label>
+  <input type="text" id="nomepesquisa" name="nomepesquisa">
+  <button type="submit" class="btn">Buscar</button>
+</form>
+
+
 <table class="table" border="1">
   <thead>
   <tr>
