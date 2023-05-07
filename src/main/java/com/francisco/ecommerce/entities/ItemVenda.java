@@ -13,6 +13,9 @@ public class ItemVenda {
     @OneToOne
     private Produto produto;
 
+    @ManyToOne
+    Venda venda;
+
 
     public ItemVenda(){
 
@@ -33,6 +36,10 @@ public class ItemVenda {
     }
 
     public Double getQuantidade() {
+        if(quantidade == null){
+            quantidade = 0.0;
+        }
+
         return quantidade;
     }
 
@@ -46,6 +53,14 @@ public class ItemVenda {
 
     public void setProduto(Produto produto) {
         this.produto = produto;
+    }
+
+    public Venda getVenda() {
+        return venda;
+    }
+
+    public void setVenda(Venda venda) {
+        this.venda = venda;
     }
 
     public double total(){

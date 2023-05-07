@@ -1,11 +1,15 @@
 package com.francisco.ecommerce.entities;
 
 import jakarta.persistence.*;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Scope("session")
+@Component
 @Entity
 public class Venda {
 
@@ -14,8 +18,7 @@ public class Venda {
     private Long id;
     private LocalDate data;
 
-    @OneToMany
-    @JoinColumn(name = "venda_id")
+    @OneToMany(mappedBy = "venda",cascade = CascadeType.PERSIST)
     private List<ItemVenda> itemVendas = new ArrayList<>();
 
     @ManyToOne

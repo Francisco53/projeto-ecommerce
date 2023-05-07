@@ -19,4 +19,8 @@ public class VendaRepository {
         Query query = em.createQuery("from Venda");
         return query.getResultList();
     }
+
+    public void save(Venda venda){
+        em.persist(venda);
+    }
 }

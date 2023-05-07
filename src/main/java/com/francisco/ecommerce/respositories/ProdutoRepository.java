@@ -4,10 +4,10 @@ import com.francisco.ecommerce.entities.Produto;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
-import org.springframework.context.annotation.EnableMBeanExport;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ProdutoRepository {
@@ -43,5 +43,8 @@ public class ProdutoRepository {
         return query.getResultList();
     }
 
+    public Produto findById(Long id) {
+        return em.find(Produto.class, id);
+    }
 
 }
