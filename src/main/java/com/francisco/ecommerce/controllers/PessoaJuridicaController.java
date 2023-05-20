@@ -4,17 +4,21 @@ import com.francisco.ecommerce.entities.PessoaFisica;
 import com.francisco.ecommerce.entities.PessoaJuridica;
 import com.francisco.ecommerce.respositories.PessoaFisicaRepository;
 import com.francisco.ecommerce.respositories.PessoaJuridicaRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
@@ -37,8 +41,21 @@ public class PessoaJuridicaController {
         return "/pessoaJuridica/form";
     }
 
+
     @PostMapping("/save")
-    public ModelAndView salvar(PessoaJuridica pessoaJuridica) {
+    public ModelAndView salvar(@Valid PessoaJuridica pessoaJuridica, BindingResult bindingResult, ModelMap model) {
+        if (bindingResult.hasErrors()){
+
+            ModelAndView modelAndView = new ModelAndView();
+            List<String> msg = new ArrayList<>();
+            for (ObjectError objectError : bindingResult.getAllErrors()) {
+                msg.add(objectError.getDefaultMessage());
+            }
+
+            modelAndView.addObject("msg", msg);
+            return new ModelAndView("/pessoaJuridica/form", model);
+        }
+
         repository.salvar(pessoaJuridica);
         return new ModelAndView("redirect:/pessoasJuridicas/list");
     }

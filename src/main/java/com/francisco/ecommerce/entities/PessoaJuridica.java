@@ -2,13 +2,20 @@ package com.francisco.ecommerce.entities;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.br.CNPJ;
 
 @Entity
 @DiscriminatorValue("J")
 public class PessoaJuridica extends Pessoa{
 
+    @NotBlank(message = "CNPJ é obrigatório")
+    @NotNull(message = "CNPJ é obrigatório")
     private String cnpj;
 
+    @NotBlank(message = "Razão Social é obrigatório")
+    @NotNull(message = "Razão Social é obrigatório")
     private String razaoSocial;
 
     public PessoaJuridica(){

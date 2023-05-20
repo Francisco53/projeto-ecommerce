@@ -3,12 +3,14 @@
 <link rel="stylesheet" type="text/css" href="style.css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
       integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<head>
-    <title>Pessoas Físicas</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+
+
+<head th:replace="~{fragmento :: head('Pessoas Físicas')}"></head>
+
 <body>
+
+<header th:replace="~{fragmento :: header}"></header>
+
 <div class="container my-2">
 
 <table  border="1" class="table table-striped table-responsive-md">
@@ -37,6 +39,10 @@
 </table>
     <a th:href="@{/home}" class="btn btn-info">Voltar</a>
     <a th:href="@{/pessoasFisicas/form}" class="btn btn-primary">Form</a>
+</div>
+
+<div class="container">
+    <footer th:replace="~{fragmento :: footer}"></footer>
 </div>
 
 </body>

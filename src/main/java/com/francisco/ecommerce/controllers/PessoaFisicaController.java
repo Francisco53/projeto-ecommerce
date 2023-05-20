@@ -3,11 +3,13 @@ package com.francisco.ecommerce.controllers;
 import com.francisco.ecommerce.entities.Pessoa;
 import com.francisco.ecommerce.entities.PessoaFisica;
 import com.francisco.ecommerce.respositories.PessoaFisicaRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -34,7 +36,13 @@ public class PessoaFisicaController {
     }
 
     @PostMapping("/save")
-    public ModelAndView salvar(PessoaFisica pessoaFisica) {
+    public ModelAndView salvar(@Valid PessoaFisica pessoaFisica, BindingResult result) {
+        if(result.hasErrors()){
+            ModelAndView modelAndView = new ModelAndView("form");
+            modelAndView.addObject("pessoaFisica", pessoaFisica);
+            return modelAndView;
+        }
+
         repository.salvar(pessoaFisica);
         return new ModelAndView("redirect:/pessoasFisicas/list");
     }

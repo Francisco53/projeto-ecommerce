@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>Produtos</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+<head th:replace="~{fragmento :: head('Produtos')}"></head>
 <body>
 
+<header th:replace="~{fragmento :: header}"></header>
 
 <form th:action="@{/produtos/pesquisarproduto}" method="get">
   <label for="nomepesquisa">Pesquisar produto:</label>
@@ -44,6 +41,10 @@
 <br>
 <br>
 <a th:href="@{/vendas/carrinho/list}" class="btn btn-info">Ver carrinho</a>
+
+<div class="container">
+  <footer th:replace="~{fragmento :: footer}"></footer>
+</div>
 
 </body>
 </html>

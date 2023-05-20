@@ -11,12 +11,13 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-w9MF6UJ/6uP/H6+hDZv/F8lWlFQIbPZdlHIMyvO8dLjK4x4pLzpzmbRLvBWibW0s" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-<head>
-    <title>Carrinho</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+<head th:replace="~{fragmento :: head('Carrinho')}"></head>
+
+
 <body>
+
+<header th:replace="~{fragmento :: header}"></header>
+
 <div class="container my-2">
 
     <table border="1" class="table table-striped table-responsive-md">
@@ -46,5 +47,10 @@
 
     <a th:href="@{/produtos/list}" class="btn btn-info">Voltar</a>
 </div>
+
+<div class="container">
+    <footer th:replace="~{fragmento :: footer}"></footer>
+</div>
+
 </body>
 </html>
