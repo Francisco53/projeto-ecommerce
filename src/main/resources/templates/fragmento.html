@@ -29,25 +29,83 @@
     <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
     <meta name="theme-color" content="#712cf9">
 
+    <!--style do index do disco f-->
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <script
+            src="https://kit.fontawesome.com/71fd24a7e6.js"
+            crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-        .bi {
-        vertical-align: -.125em;
-        fill: currentColor;
-      }
-        .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
+  *{
+  margin: 0;
+  padding: 0;
+  box-size:border-box;
+}
+
+body {font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.footer {
+    background-color: var(--light-gray);
+    color: var(--gray);
+    font-size: 18px;
+}
+
+.footer__container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row wrap;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.footer__copyright {
+    text-align: center;
+    margin-top: 20px;
+    background-color: var(--light-gray-2);
+    font-weight: bold;
+    padding: 20px;
+    color: var(--gray);
+}
+
+.footer__title {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--blue);
+    margin-bottom: 5px;
+}
+
+.footer__about-text {
+    width: 400px;
+    text-align: justify;
+}
+
+
+.footer i {
+    color: var(--orange);
+   margin-right: 1rem;
+}
+
+.footer li {
+    margin: 10px 0;
+   list-style-type: none;
+
+}
+
+:root{
+  --orange:#ff7000;
+  --blue:#004a76;
+  --dark-blue:#002d47;
+  --gray: rgba(88,89,91,1);
+  --light-gray:rgba(232,232,232,1);
+  --light-gray-2:rgba(247,247,247);
+}
+
+
+
+</style>
 </head>
 <body>
 
@@ -103,12 +161,11 @@
 </svg>
 
 
-<div class="container">
-    <footer th:fragment="footer" class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <!--<footer th:fragment="footer" class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <p class="col-md-4 mb-0 text-muted">&copy; 2022 Company, Inc</p>
 
         <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-            <!--<svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>-->
+            <--<svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
         </a>
 
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
@@ -116,8 +173,30 @@
             <li class="ms-3 mx-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
             <li class="ms-3 mx-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
         </ul>
+    </footer>-->
+
+    <footer class="footer">
+        <div class="footer__container">
+            <section>
+                <h2 class="footer__title">Sobre</h2>
+                <p class="footer__about-text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi amet quaerat molestiae nobis rem at laboriosam facere, labore vitae ipsum in assumenda id facilis sunt consequatur, expedita officiis doloremque et.
+                </p>
+            </section>
+            <address>
+                <h2 class="footer__title">Contato</h2>
+                <ul>
+                    <li><i class="fa-sharp fa-solid fa-envelope"></i>email@email.com</li>
+                    <li><i class="fa-solid fa-phone"></i>(00)0000-0000</li>
+                    <li><i class="fa-brands fa-whatsapp"></i>(00) 0 0000-0000</li>
+                </ul>
+            </address>
+        </div>
+        <section class="footer__copyright ">
+            &copy; Todos os direitos reservados
+        </section>
     </footer>
-</div>
+
 
 </body>
 
