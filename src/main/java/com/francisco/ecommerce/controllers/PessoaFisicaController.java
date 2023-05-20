@@ -2,6 +2,7 @@ package com.francisco.ecommerce.controllers;
 
 import com.francisco.ecommerce.entities.Pessoa;
 import com.francisco.ecommerce.entities.PessoaFisica;
+import com.francisco.ecommerce.entities.PessoaJuridica;
 import com.francisco.ecommerce.respositories.PessoaFisicaRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
@@ -36,11 +39,17 @@ public class PessoaFisicaController {
     }
 
     @PostMapping("/save")
-    public ModelAndView salvar(@Valid PessoaFisica pessoaFisica, BindingResult result) {
-        if(result.hasErrors()){
-            ModelAndView modelAndView = new ModelAndView("form");
-            modelAndView.addObject("pessoaFisica", pessoaFisica);
-            return modelAndView;
+    public ModelAndView salvar(@Valid PessoaFisica pessoaFisica, BindingResult bindingResult, ModelMap model) {
+        if (bindingResult.hasErrors()){
+
+            ModelAndView modelAndView = new ModelAndView();
+            List<String> msg = new ArrayList<>();
+            for (ObjectError objectError : bindingResult.getAllErrors()) {
+                msg.add(objectError.getDefaultMessage());
+            }
+
+            modelAndView.addObject("msg", msg);
+            return new ModelAndView("/pessoaFisica/form", model);
         }
 
         repository.salvar(pessoaFisica);

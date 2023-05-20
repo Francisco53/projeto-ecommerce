@@ -2,15 +2,18 @@ package com.francisco.ecommerce.entities;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @DiscriminatorValue("F")
 public class PessoaFisica extends Pessoa {
 
     @NotBlank(message = "CPF é obrigatório")
+    @NotNull(message = "CPF é obrigatório")
     private String cpf;
 
     @NotBlank(message = "Nome é obrigatório")
+    @NotNull(message = "Nome é obrigatório")
     private String nome;
 
     public PessoaFisica(){
