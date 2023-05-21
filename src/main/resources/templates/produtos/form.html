@@ -9,8 +9,19 @@
 <h1>FORM</h1>
 <form th:action="${produto.id == null} ? @{/produtos/save} : @{/produtos/update}" th:object="${produto}" method="post">
   <input type="hidden" th:field="*{id}">
-  <input type="text" th:field="*{descricao}"  placeholder="Descricao">
-  <input type="text" th:field="*{valor}"  placeholder="Valor">
+
+  <div>
+    <input type="text" th:field="*{descricao}" placeholder="Descrição" class="my-2" style="min-width:25%;" ><br>
+    <!--<label th:if="${#fields.hasErrors('razaoSocial')}" th:errors="*{razaoSocial}"></label>-->
+    <span class="text-danger"  th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}" onfocus="this.value=''"></span>
+  </div>
+
+  <div>
+    <input type="text" th:field="*{valor}" placeholder="Valor" class="my-2" style="min-width:25%;" ><br>
+    <!--<label th:if="${#fields.hasErrors('razaoSocial')}" th:errors="*{razaoSocial}"></label>-->
+    <span class="text-danger"  th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}" onfocus="this.value=''"></span>
+  </div>
+
   <input type="submit" value="Enviar">
 </form>
 <br>
