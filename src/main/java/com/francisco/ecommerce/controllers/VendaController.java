@@ -1,11 +1,9 @@
 package com.francisco.ecommerce.controllers;
 
 
-import com.francisco.ecommerce.entities.ItemVenda;
-import com.francisco.ecommerce.entities.PessoaFisica;
-import com.francisco.ecommerce.entities.Produto;
-import com.francisco.ecommerce.entities.Venda;
+import com.francisco.ecommerce.entities.*;
 import com.francisco.ecommerce.respositories.PessoaFisicaRepository;
+import com.francisco.ecommerce.respositories.PessoaJuridicaRepository;
 import com.francisco.ecommerce.respositories.ProdutoRepository;
 import com.francisco.ecommerce.respositories.VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +34,9 @@ public class VendaController {
     private PessoaFisicaRepository pessoaFisicaRepository;
 
     @Autowired
+    private PessoaJuridicaRepository pessoaJuridicaRepository;
+
+    @Autowired
     private Venda venda;
 
 
@@ -44,6 +45,24 @@ public class VendaController {
     public ModelAndView carrinho(){
         return new ModelAndView("/carrinho/list");
     }
+
+
+    @PostMapping("/pesquisar")
+    public String listaPessoas(Model model, @RequestParam("pessoa") String pessoa) {
+        List<PessoaFisica> pessoaFisicas = pessoaFisicaRepository.pessoaFisicas();
+        List<PessoaJuridica> pessoaJuridicas = pessoaJuridicaRepository.pessoaJuridicas();
+
+        if (pessoa.equals("F")) {
+            model.addAttribute("pessoas", pessoaFisicas);
+        } else {
+            model.addAttribute("pessoas", pessoaJuridicas);
+        }
+
+        return "/carrinho/list";
+    }
+
+
+
 
     @PostMapping("/adicionar/{id}")
     public ModelAndView adicionarCarrinho(@PathVariable Long id, @RequestParam("quantidade") String quantidade, RedirectAttributes redirect) {
@@ -91,10 +110,4 @@ public class VendaController {
         return "/vendas/list";
     }
 
-    @GetMapping("/pessoas")
-    public String getPessoas(Model model) {
-        List<PessoaFisica> pessoasList = pessoaFisicaRepository.pessoaFisicas();
-        model.addAttribute("pessoasList", pessoasList);
-        return "carrinho/list";
-    }
 }
