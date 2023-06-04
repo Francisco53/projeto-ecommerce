@@ -41,12 +41,26 @@
         </tbody>
     </table>
 
+
+
+    <select name="pessoa" >
+        <option value="0">select option</option>
+        <option th:each="p : ${pessoasList}" th:value="${p.id}" th:text="${p.id}"></option>
+    </select>
+
+
+
+
     <a th:href="@{/vendas/finalizar}" class="btn btn-success float-right my-4">Finalizar Comprar</a>
     <hr>
     <h2 class="float-right">Total: R$ <td th:text="${session.venda.total}"></td></h2>
 
     <a th:href="@{/produtos/list}" class="btn btn-info">Voltar</a>
 </div>
+
+
+<!-- O segundo valor estará selecionado inicialmente -->
+
 
 <div class="container">
     <footer th:replace="~{fragmento :: footer}"></footer>

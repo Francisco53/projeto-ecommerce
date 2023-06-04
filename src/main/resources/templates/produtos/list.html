@@ -6,6 +6,11 @@
 <header th:replace="~{fragmento :: header}"></header>
 
 <div class="container my-2">
+
+    <div th:if="${erroQtd != null}" >
+        <span class="alert alert-danger" th:text="${erroQtd}"></span>
+    </div>
+
     <form th:action="@{/produtos/pesquisarproduto}" method="get" style="margin-bottom: 20px;">
         <label for="nomepesquisa">Pesquisar produto:</label>
         <input type="text" id="nomepesquisa" name="nomepesquisa">

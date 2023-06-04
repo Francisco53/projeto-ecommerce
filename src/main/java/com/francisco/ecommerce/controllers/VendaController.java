@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -38,20 +39,24 @@ public class VendaController {
     private Venda venda;
 
 
+
     @GetMapping("/carrinho/list")
     public ModelAndView carrinho(){
         return new ModelAndView("/carrinho/list");
     }
 
     @PostMapping("/adicionar/{id}")
-    public ModelAndView adicionarCarrinho(@PathVariable Long id, @RequestParam("quantidade") double quantidade) {
+    public ModelAndView adicionarCarrinho(@PathVariable Long id, @RequestParam("quantidade") String quantidade, RedirectAttributes redirect) {
+        if(quantidade.isEmpty()){
+            redirect.addFlashAttribute("erroQtd","Você deve inserir uma quantidade!");
+            return new ModelAndView("redirect:/produtos/list");
+        }
         ModelAndView mv = new ModelAndView("/carrinho/list");
         Produto produto = produtoRepository.findById(id);
         if (produto != null){
-
             ItemVenda item = new ItemVenda();
             item.setProduto(produto);
-            item.setQuantidade(quantidade);
+            item.setQuantidade(Double.parseDouble(quantidade));
             item.setVenda(venda);
             venda.getItemVendas().add(item);
 
@@ -84,5 +89,12 @@ public class VendaController {
         List<Venda> vendas = repository.vendas();
         model.addAttribute("vendas", vendas);
         return "/vendas/list";
+    }
+
+    @GetMapping("/pessoas")
+    public String getPessoas(Model model) {
+        List<PessoaFisica> pessoasList = pessoaFisicaRepository.pessoaFisicas();
+        model.addAttribute("pessoasList", pessoasList);
+        return "carrinho/list";
     }
 }
