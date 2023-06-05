@@ -54,12 +54,15 @@ public class VendaController {
 
         if (pessoa.equals("F")) {
             model.addAttribute("pessoas", pessoaFisicas);
+            model.addAttribute("tipoPessoa", "F");
         } else {
             model.addAttribute("pessoas", pessoaJuridicas);
+            model.addAttribute("tipoPessoa", "J");
         }
 
         return "/carrinho/list";
     }
+
 
 
 

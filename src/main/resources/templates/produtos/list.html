@@ -7,14 +7,14 @@
 
 <div class="container my-2">
 
-    <div th:if="${erroQtd != null}" >
-        <span class="alert alert-danger" th:text="${erroQtd}"></span>
+    <div th:if="${erroQtd != null}" class="d-flex justify-content-center align-items-center" >
+        <span class="alert alert-danger mb-0" th:text="${erroQtd}"></span>
     </div>
 
     <form th:action="@{/produtos/pesquisarproduto}" method="get" style="margin-bottom: 20px;">
         <label for="nomepesquisa">Pesquisar produto:</label>
-        <input type="text" id="nomepesquisa" name="nomepesquisa">
-        <button type="submit" class="btn">Buscar</button>
+        <input type="text" id="nomepesquisa" name="nomepesquisa" style="min-height:30px;">
+        <button type="submit" class="btn btn-secondary">Buscar</button>
     </form>
 
 
@@ -32,14 +32,14 @@
             <td th:text="${p.id}"></td>
             <td th:text="${p.descricao}"></td>
             <td th:text="${p.valor}"></td>
-            <td><a th:href="@{/produtos/edit/{id}(id=${p.id})}">Editar</a></td>
+            <td><a th:href="@{/produtos/edit/{id}(id=${p.id})}" class="btn btn-success" >Editar</a></td>
             <td><a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"
-                   th:href="@{/produtos/remove/{id}(id=${p.id})}">Excluir</a></td>
+                   th:href="@{/produtos/remove/{id}(id=${p.id})}" class="btn btn-danger" >Excluir</a></td>
             <td>
             <td>
                 <form method="POST" th:action="@{/vendas/adicionar/{id}(id=${p.id})}">
                     <input type="number" min="1" name="quantidade" placeholder="quantidade">
-                    <button type="submit" class="btn btn-info">Adicionar</button>
+                    <button type="submit" class="btn btn-warning">Adicionar</button>
                 </form>
             </td>
         </tr>

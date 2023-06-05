@@ -36,7 +36,7 @@
             <td th:text="${#numbers.formatCurrency(v.total())}"></td>
             <td th:text="${v.pessoa.nome}"></td>
             <td>
-                <button type="button" class="btn btn-info" data-toggle="collapse" th:data-target="'#detalhes-' + ${v.id}">Detalhes</button>
+                <button type="button" class="btn btn-secondary" data-toggle="collapse" th:data-target="'#detalhes-' + ${v.id}">Detalhes</button>
                 <div class="collapse" th:id="'detalhes-' + ${v.id}">
                     <table>
                         <tbody>

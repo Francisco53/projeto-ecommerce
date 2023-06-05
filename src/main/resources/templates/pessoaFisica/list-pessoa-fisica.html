@@ -32,9 +32,9 @@
         <td th:text="${p.cpf}"></td>
         <td th:text="${p.email}"></td>
         <td th:text="${p.telefone}"></td>
-        <td> <a th:href="@{/pessoasFisicas/edit/{id}(id=${p.id})}">Editar</a> </td>
+        <td> <a th:href="@{/pessoasFisicas/edit/{id}(id=${p.id})}" class="btn btn-success">Editar</a> </td>
         <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"
-                th:href="@{/pessoasFisicas/remove/{id}(id=${p.id})}">Excluir</a> </td>
+                th:href="@{/pessoasFisicas/remove/{id}(id=${p.id})}" class="btn btn-danger">Excluir</a> </td>
     </tr>
 </table>
     <a th:href="@{/home}" class="btn btn-info">Voltar</a>
