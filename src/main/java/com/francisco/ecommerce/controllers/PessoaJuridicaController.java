@@ -2,6 +2,7 @@ package com.francisco.ecommerce.controllers;
 
 import com.francisco.ecommerce.entities.PessoaFisica;
 import com.francisco.ecommerce.entities.PessoaJuridica;
+import com.francisco.ecommerce.entities.Produto;
 import com.francisco.ecommerce.respositories.PessoaFisicaRepository;
 import com.francisco.ecommerce.respositories.PessoaJuridicaRepository;
 import jakarta.validation.Valid;
@@ -12,10 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -77,5 +75,13 @@ public class PessoaJuridicaController {
         repository.update(pessoaJuridica);
         return new ModelAndView("redirect:/pessoasJuridicas/list");
     }
+
+    @GetMapping("/pesquisarpessoajuridica")
+    public ModelAndView pesquisarPessoaJuridica(@RequestParam("nomepesquisa") String nomepesquisa, ModelMap model) {
+        List<PessoaJuridica> pessoaJuridicas = repository.findPessoaJuridicaByNome(nomepesquisa);
+        model.addAttribute("pessoasJuridicas", pessoaJuridicas);
+        return new ModelAndView("/pessoaJuridica/list-pessoa-juridica", model);
+    }
+
 
 }

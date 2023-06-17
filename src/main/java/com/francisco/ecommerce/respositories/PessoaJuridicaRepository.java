@@ -3,9 +3,8 @@ package com.francisco.ecommerce.respositories;
 import com.francisco.ecommerce.entities.Pessoa;
 import com.francisco.ecommerce.entities.PessoaFisica;
 import com.francisco.ecommerce.entities.PessoaJuridica;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
+import com.francisco.ecommerce.entities.Produto;
+import jakarta.persistence.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -38,4 +37,26 @@ public class PessoaJuridicaRepository {
     public void update(PessoaJuridica pessoaJuridica){
         em.merge(pessoaJuridica);
     }
+
+
+    public List<PessoaJuridica> findPessoaJuridicaByNome(String nome) {
+        TypedQuery<PessoaJuridica> query =
+                em.createQuery("SELECT pj FROM PessoaJuridica pj WHERE pj.razaoSocial LIKE :nomepesquisa", PessoaJuridica.class);
+        query.setParameter("nomepesquisa", "%"+nome+"%");
+        return query.getResultList();
+    }
+
+    public PessoaJuridica findIdByRazaoSocial(String nome) {
+        String jpql = "SELECT p FROM PessoaJuridica p WHERE p.razaoSocial = :nome";
+        TypedQuery<PessoaJuridica> query = em.createQuery(jpql, PessoaJuridica.class);
+        query.setParameter("nome", nome);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+
+
 }

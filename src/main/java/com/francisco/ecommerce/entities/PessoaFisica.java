@@ -20,6 +20,8 @@ public class PessoaFisica extends Pessoa {
 
     }
 
+
+
     public PessoaFisica(Long id, String email, String telefone, String cpf, String nome) {
         super(id, email, telefone);
         this.cpf = cpf;

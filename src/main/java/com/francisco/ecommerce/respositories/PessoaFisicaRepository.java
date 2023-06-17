@@ -2,12 +2,12 @@ package com.francisco.ecommerce.respositories;
 
 import com.francisco.ecommerce.entities.Pessoa;
 import com.francisco.ecommerce.entities.PessoaFisica;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
+import jakarta.persistence.*;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 
 @Repository
 public class PessoaFisicaRepository {
@@ -37,4 +37,18 @@ public class PessoaFisicaRepository {
     public void update(PessoaFisica pessoaFisica){
         em.merge(pessoaFisica);
     }
+
+
+    public PessoaFisica findIdByNome(String nome) {
+        String jpql = "SELECT p FROM PessoaFisica p WHERE p.nome = :nome";
+        TypedQuery<PessoaFisica> query = em.createQuery(jpql, PessoaFisica.class);
+        query.setParameter("nome", nome);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+
 }
