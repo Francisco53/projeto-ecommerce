@@ -1,57 +1,57 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragmento :: head('Produtos')}"></head>
+<html th:replace="~{/fragments/layout :: layout(~{::head},~{::main})}">
+
+
+<head th:replace="fragments/head.html :: head('Produtos')"></head>
+
+
 <body>
 
-<header th:replace="~{fragmento :: header}"></header>
+<main>
+    <div class="container my-2">
 
-<div class="container my-2">
+        <div th:if="${erroQtd != null}" class="d-flex justify-content-center align-items-center" >
+            <span class="alert alert-danger mb-0" th:text="${erroQtd}"></span>
+        </div>
 
-    <div th:if="${erroQtd != null}" class="d-flex justify-content-center align-items-center" >
-        <span class="alert alert-danger mb-0" th:text="${erroQtd}"></span>
+        <form th:action="@{/produtos/pesquisarproduto}" method="get" style="margin-bottom: 20px;">
+            <label for="nomepesquisa">Pesquisar produto:</label>
+            <input type="text" id="nomepesquisa" name="nomepesquisa" style="min-height:30px;">
+            <button type="submit" class="btn btn-secondary">Buscar</button>
+        </form>
+
+
+        <table class="table" border="1">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descricao</th>
+                <th>Valor</th>
+                <th colspan="3">Opções</th>
+            </tr>
+
+            </thead>
+            <tr th:each="p : ${produtos}">
+                <td th:text="${p.id}"></td>
+                <td th:text="${p.descricao}"></td>
+                <td th:text="${p.valor}"></td>
+                <td><a th:href="@{/produtos/edit/{id}(id=${p.id})}" class="btn btn-success" >Editar</a></td>
+                <td><a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"
+                       th:href="@{/produtos/remove/{id}(id=${p.id})}" class="btn btn-danger" >Excluir</a></td>
+                <td>
+                <td>
+                    <form method="POST" th:action="@{/vendas/adicionar/{id}(id=${p.id})}">
+                        <input type="number" min="1" name="quantidade" placeholder="quantidade">
+                        <button type="submit" class="btn btn-warning">Adicionar</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+
+        <a th:href="@{/vendas/carrinho/list}" class="btn btn-info">Ver carrinho</a>
+
     </div>
-
-    <form th:action="@{/produtos/pesquisarproduto}" method="get" style="margin-bottom: 20px;">
-        <label for="nomepesquisa">Pesquisar produto:</label>
-        <input type="text" id="nomepesquisa" name="nomepesquisa" style="min-height:30px;">
-        <button type="submit" class="btn btn-secondary">Buscar</button>
-    </form>
-
-
-    <table class="table" border="1">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Descricao</th>
-            <th>Valor</th>
-            <th colspan="3">Opções</th>
-        </tr>
-
-        </thead>
-        <tr th:each="p : ${produtos}">
-            <td th:text="${p.id}"></td>
-            <td th:text="${p.descricao}"></td>
-            <td th:text="${p.valor}"></td>
-            <td><a th:href="@{/produtos/edit/{id}(id=${p.id})}" class="btn btn-success" >Editar</a></td>
-            <td><a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"
-                   th:href="@{/produtos/remove/{id}(id=${p.id})}" class="btn btn-danger" >Excluir</a></td>
-            <td>
-            <td>
-                <form method="POST" th:action="@{/vendas/adicionar/{id}(id=${p.id})}">
-                    <input type="number" min="1" name="quantidade" placeholder="quantidade">
-                    <button type="submit" class="btn btn-warning">Adicionar</button>
-                </form>
-            </td>
-        </tr>
-    </table>
-
-    <a th:href="@{/vendas/carrinho/list}" class="btn btn-info">Ver carrinho</a>
-
-</div>
-
-<div class="container">
-    <footer th:replace="~{fragmento :: footer}"></footer>
-</div>
+</main>
 
 </body>
 </html>

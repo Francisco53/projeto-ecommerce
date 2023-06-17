@@ -1,75 +1,63 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" type="text/css" href="style.css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<!-- Arquivos CSS do Bootstrap -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<html th:replace="~{/fragments/layout :: layout(~{::head},~{::main})}">
 
-<!-- Arquivos JavaScript do Bootstrap -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-w9MF6UJ/6uP/H6+hDZv/F8lWlFQIbPZdlHIMyvO8dLjK4x4pLzpzmbRLvBWibW0s" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-<head th:replace="~{fragmento :: head('Vendas')}"></head>
+<head th:replace="fragments/head.html :: head('Vendas')"></head>
+
 <body>
 
-<header th:replace="~{fragmento :: header}"></header>
+<main>
+    <div class="container my-2">
 
-<div class="container my-2">
+        <div th:if="${erroQtd != null}" class="d-flex justify-content-center align-items-center" >
+            <span class="alert alert-danger mb-0" th:text="${erroQtd}"></span>
+        </div>
 
-    <div th:if="${erroQtd != null}" class="d-flex justify-content-center align-items-center" >
-        <span class="alert alert-danger mb-0" th:text="${erroQtd}"></span>
+        <form th:action="@{/vendas/pesquisarvenda}" method="get" style="margin-bottom: 20px;">
+            <label for="data">Pesquisar venda:</label>
+            <input name="data" id="data" type="date" class="mt-2" style="min-height: 30px;">
+            <button type="submit" class="btn btn-secondary mt-2">Buscar</button>
+        </form>
+
+
+        <table border="1" class="table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Data</th>
+                <th>Total</th>
+                <th>Cliente</th>
+                <th>Detalhes</th>
+            </tr>
+            <h1 style="text-align:center">Vendas</h1>
+            </thead>
+            <tbody>
+            <tr th:each="v : ${vendas}">
+                <td th:text="${v.id}"></td>
+                <td th:text="${#temporals.format(v.data, 'dd/MM/yyyy')}"></td>
+                <td th:text="${#numbers.formatCurrency(v.total())}"></td>
+                <td th:text="${v.pessoa.nome}"></td>
+                <td>
+                    <button type="button" class="btn btn-secondary" data-toggle="collapse" th:data-target="'#detalhes-' + ${v.id}">Detalhes</button>
+                    <div class="collapse" th:id="'detalhes-' + ${v.id}">
+                        <table>
+                            <tbody>
+                            <tr th:each="i : ${v.itemVendas}">
+                                <td th:text="${i.produto.descricao}"></td>
+                                <td th:text="${i.quantidade}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+
+        <a th:href="@{/home}" class="btn btn-info">Voltar</a>
     </div>
-
-    <form th:action="@{/vendas/pesquisarvenda}" method="get" style="margin-bottom: 20px;">
-        <label for="data">Pesquisar venda:</label>
-        <input name="data" id="data" type="date" class="mt-2" style="min-height: 30px;">
-        <button type="submit" class="btn btn-secondary mt-2">Buscar</button>
-    </form>
-
-
-    <table border="1" class="table table-striped table-responsive-md">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Data</th>
-            <th>Total</th>
-            <th>Cliente</th>
-            <th>Detalhes</th>
-        </tr>
-        <h1 style="text-align:center">Vendas</h1>
-        </thead>
-        <tbody>
-        <tr th:each="v : ${vendas}">
-            <td th:text="${v.id}"></td>
-            <td th:text="${#temporals.format(v.data, 'dd/MM/yyyy')}"></td>
-            <td th:text="${#numbers.formatCurrency(v.total())}"></td>
-            <td th:text="${v.pessoa.nome}"></td>
-            <td>
-                <button type="button" class="btn btn-secondary" data-toggle="collapse" th:data-target="'#detalhes-' + ${v.id}">Detalhes</button>
-                <div class="collapse" th:id="'detalhes-' + ${v.id}">
-                    <table>
-                        <tbody>
-                        <tr th:each="i : ${v.itemVendas}">
-                            <td th:text="${i.produto.descricao}"></td>
-                            <td th:text="${i.quantidade}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-
-    <a th:href="@{/home}" class="btn btn-info">Voltar</a>
-</div>
-
-<div class="container">
-    <footer th:replace="~{fragmento :: footer}"></footer>
-</div>
+</main>
 
 </body>
 </html>

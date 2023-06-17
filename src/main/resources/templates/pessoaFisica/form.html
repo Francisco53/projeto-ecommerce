@@ -1,53 +1,47 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html th:replace="~{/fragments/layout :: layout(~{::head},~{::main})}">
 
 
-<head th:replace="~{fragmento :: head('Form')}"></head>
+<head th:replace="fragments/head.html :: head('Form')"></head>
 
 
 <body>
 
-<header th:replace="~{fragmento :: header}"></header>
+<main>
+    <div class="container-fluid text-center my-4">
+        <h1 class="text-center">Cadastro</h1>
 
-<div class="container-fluid text-center my-4">
-    <h1 class="text-center">Cadastro</h1>
+        <form th:action="${pessoaFisica.id == null} ? @{/pessoasFisicas/save} : @{/pessoasFisicas/update}" th:object="${pessoaFisica}" method="post" >
+            <input type="hidden" th:field="*{id}">
+            <!--<input type="text" th:field="*{tipo}" value="F" placeholder="Pessoa" class="my-2" style="min-width:25%;">-->
+            <div>
+                <input type="text" th:field="*{nome}" placeholder="Nome" class="my-2" style="min-width:25%;" ><br>
+                <!--<label th:if="${#fields.hasErrors('razaoSocial')}" th:errors="*{razaoSocial}"></label>-->
+                <span class="text-danger"  th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" onfocus="this.value=''"></span>
+            </div>
 
+            <input type="text" th:field="*{cpf}" value="F" placeholder="CPF" class="my-2" style="min-width:25%;"><br>
+            <div th:if="${#fields.hasErrors('cpf')}" class="text-danger">
+                <p th:errors="*{cpf}"></p>
+            </div>
+            <input type="text" th:field="*{email}"  placeholder="Email" class="my-2" style="min-width:25%;"><br>
+            <div th:if="${#fields.hasErrors('email')}" class="text-danger">
+                <p th:errors="*{email}"></p>
+            </div>
+            <input type="text" th:field="*{telefone}"  placeholder="Telefone" class="my-2" style="min-width:25%;">
+            <div th:if="${#fields.hasErrors('telefone')}" class="text-danger">
+                <p th:errors="*{telefone}"></p>
+            </div>
+            <!--<input type="radio" id="F" name="tipo" class="form-check-input"  checked>-->
 
-
-    <form th:action="${pessoaFisica.id == null} ? @{/pessoasFisicas/save} : @{/pessoasFisicas/update}" th:object="${pessoaFisica}" method="post" >
-       <input type="hidden" th:field="*{id}">
-        <!--<input type="text" th:field="*{tipo}" value="F" placeholder="Pessoa" class="my-2" style="min-width:25%;">-->
-        <div>
-            <input type="text" th:field="*{nome}" placeholder="Nome" class="my-2" style="min-width:25%;" ><br>
-            <!--<label th:if="${#fields.hasErrors('razaoSocial')}" th:errors="*{razaoSocial}"></label>-->
-            <span class="text-danger"  th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" onfocus="this.value=''"></span>
-        </div>
-
-        <input type="text" th:field="*{cpf}" value="F" placeholder="CPF" class="my-2" style="min-width:25%;"><br>
-        <div th:if="${#fields.hasErrors('cpf')}" class="text-danger">
-            <p th:errors="*{cpf}"></p>
-        </div>
-        <input type="text" th:field="*{email}"  placeholder="Email" class="my-2" style="min-width:25%;"><br>
-        <div th:if="${#fields.hasErrors('email')}" class="text-danger">
-            <p th:errors="*{email}"></p>
-        </div>
-        <input type="text" th:field="*{telefone}"  placeholder="Telefone" class="my-2" style="min-width:25%;">
-        <div th:if="${#fields.hasErrors('telefone')}" class="text-danger">
-            <p th:errors="*{telefone}"></p>
-        </div>
-        <!--<input type="radio" id="F" name="tipo" class="form-check-input"  checked>-->
-
-        <div class="form-check form-check-block">
-            <input type="submit" class="btn btn-success my-2" value="Enviar">
-            <!--<button type="submit" class="btn btn-primary my-2">Salvar</button>-->
-            <a th:href="@{/home}" class="btn btn-primary" >Home</a>
-        </div>
-   </form>
-</div>
-
-<div class="container">
-    <footer th:replace="~{fragmento :: footer}"></footer>
-</div>
+            <div class="form-check form-check-block">
+                <input type="submit" class="btn btn-success my-2" value="Enviar">
+                <!--<button type="submit" class="btn btn-primary my-2">Salvar</button>-->
+                <a th:href="@{/home}" class="btn btn-primary" >Home</a>
+            </div>
+        </form>
+    </div>
+</main>
 
 </body>
 </html>

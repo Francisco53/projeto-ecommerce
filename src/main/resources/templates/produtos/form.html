@@ -1,36 +1,32 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragmento :: head('Form')}"></head>
+<html th:replace="~{/fragments/layout :: layout(~{::head},~{::main})}">
+
+<head th:replace="fragments/head.html :: head('Form')"></head>
 
 <body>
+<main>
+  <h1>FORM</h1>
+  <form th:action="${produto.id == null} ? @{/produtos/save} : @{/produtos/update}" th:object="${produto}" method="post">
+    <input type="hidden" th:field="*{id}">
 
-<header th:replace="~{fragmento :: header}"></header>
+    <div>
+      <input type="text" th:field="*{descricao}" placeholder="Descrição" class="my-2" style="min-width:25%;" ><br>
+      <!--<label th:if="${#fields.hasErrors('razaoSocial')}" th:errors="*{razaoSocial}"></label>-->
+      <span class="text-danger"  th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}" onfocus="this.value=''"></span>
+    </div>
 
-<h1>FORM</h1>
-<form th:action="${produto.id == null} ? @{/produtos/save} : @{/produtos/update}" th:object="${produto}" method="post">
-  <input type="hidden" th:field="*{id}">
+    <div>
+      <input type="text" th:field="*{valor}" placeholder="Valor" class="my-2" style="min-width:25%;" ><br>
+      <!--<label th:if="${#fields.hasErrors('razaoSocial')}" th:errors="*{razaoSocial}"></label>-->
+      <span class="text-danger"  th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}" onfocus="this.value=''"></span>
+    </div>
 
-  <div>
-    <input type="text" th:field="*{descricao}" placeholder="Descrição" class="my-2" style="min-width:25%;" ><br>
-    <!--<label th:if="${#fields.hasErrors('razaoSocial')}" th:errors="*{razaoSocial}"></label>-->
-    <span class="text-danger"  th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}" onfocus="this.value=''"></span>
-  </div>
-
-  <div>
-    <input type="text" th:field="*{valor}" placeholder="Valor" class="my-2" style="min-width:25%;" ><br>
-    <!--<label th:if="${#fields.hasErrors('razaoSocial')}" th:errors="*{razaoSocial}"></label>-->
-    <span class="text-danger"  th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}" onfocus="this.value=''"></span>
-  </div>
-
-  <input type="submit" value="Enviar">
-</form>
-<br>
-<br>
-<br>
-
-<div class="container">
-  <footer th:replace="~{fragmento :: footer}"></footer>
-</div>
+    <input type="submit" value="Enviar">
+  </form>
+  <br>
+  <br>
+  <br>
+</main>
 
 </body>
 </html>
