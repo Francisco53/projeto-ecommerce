@@ -1,51 +1,68 @@
 <!DOCTYPE html>
 <html th:replace="~{/fragments/layout :: layout(~{::head},~{::main})}">
 
-<head th:replace="fragments/head.html :: head('Form')"></head>
+<head th:replace="fragments/head.html :: head('Form')">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
 
 <body>
 
 <main>
     <div class="container-fluid text-center my-4">
-        <h1 class="text-center">Cadastro</h1>
-        <form th:action="${pessoaJuridica.id == null} ? @{/pessoasJuridicas/save} : @{/pessoasJuridicas/update}" th:object="${pessoaJuridica}" method="post" >
+        <h1 class="text-center">Cadastro de Jurídica </h1>
+        <form th:action="${pessoaJuridica.id == null} ? @{/pessoasJuridicas/save} : @{/pessoasJuridicas/update}" th:object="${pessoaJuridica}" method="post" class="row g-3">
             <input type="hidden" th:field="*{id}">
-            <!--<input type="text" th:field="*{tipo}" value="F" placeholder="Pessoa" class="my-2" style="min-width:25%;">-->
-            <!-- <div class="alert alert-danger" th:each="m: ${msg}">
-                 <ul>
-                     <li th:text="${m}"></li>
-                 </ul>
-             </div>-->
 
-            <div>
-                <input type="text" th:field="*{razaoSocial}" placeholder="Razão Social" class="my-2" style="min-width:25%;" ><br>
-                <!--<label th:if="${#fields.hasErrors('razaoSocial')}" th:errors="*{razaoSocial}"></label>-->
-                <span class="text-danger"  th:if="${#fields.hasErrors('razaoSocial')}" th:errors="*{razaoSocial}" onfocus="this.value=''"></span>
+            <div class="col-md-6">
+                <label class="form-label">Razão Social:</label>
+                <input type="text" th:field="*{razaoSocial}" class="form-control" size="40">
+                <span class="text-danger" th:if="${#fields.hasErrors('razaoSocial')}" th:errors="*{razaoSocial}" onfocus="this.value=''"></span>
             </div>
 
-            <div>
-                <input type="text" th:field="*{cnpj}" placeholder="CNPJ" class="my-2" style="min-width:25%;" title="CNPJ inválido" ><br>
-                <!--<label th:if="${#fields.hasErrors('cnpj')}" th:errors="*{cnpj}"></label>-->
-                <span class="text-danger"  th:if="${#fields.hasErrors('cnpj')}" th:errors="*{cnpj}" onfocus="this.value=''"></span>
+            <div class="col-md-6">
+                <label class="form-label">CNPJ:</label>
+                <input type="text" th:field="*{cnpj}" class="form-control" size="40" title="CNPJ inválido">
+                <span class="text-danger" th:if="${#fields.hasErrors('cnpj')}" th:errors="*{cnpj}" onfocus="this.value=''"></span>
             </div>
 
-            <div>
-                <input type="email" th:field="*{email}" placeholder="Email" class="my-2" style="min-width:25%;" ><br>
-                <!--<label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></label>-->
-                <span class="text-danger"  th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            <div class="col-md-6">
+                <label class="form-label">Email:</label>
+                <input type="email" th:field="*{email}" class="form-control" size="40">
+                <span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
             </div>
 
-            <div>
-                <input type="tel" th:field="*{telefone}" placeholder="Telefone" class="my-2" style="min-width:25%;" pattern="[0-9]{10,11}" title="Telefone inválido" ><br>
-                <!--<label th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></label>-->
-                <span class="text-danger"  th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></span>
+            <div class="col-md-6">
+                <label class="form-label">Telefone:</label>
+                <input type="tel" th:field="*{telefone}" class="form-control" size="35" pattern="[0-9]{10,11}" title="Telefone inválido">
+                <span class="text-danger" th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></span>
             </div>
-            <!--<input type="radio" id="F" name="tipo" class="form-check-input"  checked>-->
 
-            <div class="form-check form-check-block">
-                <input type="submit" class="btn btn-success my-2" value="Enviar">
-                <!--<button type="submit" class="btn btn-primary my-2">Salvar</button>-->
-                <a th:href="@{/home}" class="btn btn-primary" >Home</a>
+            <div class="col-md-6">
+                <label class="form-label">Cep:</label>
+                <input name="cep" type="text" id="cep" value="" size="30" maxlength="9" onblur="pesquisacep(this.value);" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Rua:</label>
+                <input name="rua" type="text" id="rua" size="40" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Bairro:</label>
+                <input name="bairro" type="text" id="bairro" size="40" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Cidade:</label>
+                <input name="cidade" type="text" id="cidade" size="40" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Estado:</label>
+                <input name="uf" type="text" id="uf" size="2" class="form-control">
+            </div>
+
+            <div class="col-12">
+                <div class="form-check form-check-block">
+                    <input type="submit" class="btn btn-success my-2" value="Enviar">
+                    <a th:href="@{/fragmento}" class="btn btn-primary">Home</a>
+                </div>
             </div>
         </form>
     </div>
