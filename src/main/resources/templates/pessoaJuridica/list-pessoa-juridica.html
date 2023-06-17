@@ -33,7 +33,7 @@
     <h1 style="text-align:center">Pessoas Jurídicas</h1>
 
     </thead>
-    <tr th:each="p : ${pessoas}" th:object="${pessoaJuridica}">
+    <tr th:each="p : ${pessoas}">
         <td th:text="${p.id}"> </td>
         <td th:text="${p.razaoSocial}"></td>
         <td th:text="${p.cnpj}"></td>

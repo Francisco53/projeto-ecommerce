@@ -79,7 +79,7 @@ public class PessoaJuridicaController {
     @GetMapping("/pesquisarpessoajuridica")
     public ModelAndView pesquisarPessoaJuridica(@RequestParam("nomepesquisa") String nomepesquisa, ModelMap model) {
         List<PessoaJuridica> pessoaJuridicas = repository.findPessoaJuridicaByNome(nomepesquisa);
-        model.addAttribute("pessoasJuridicas", pessoaJuridicas);
+        model.addAttribute("pessoas", pessoaJuridicas);
         return new ModelAndView("/pessoaJuridica/list-pessoa-juridica", model);
     }
 

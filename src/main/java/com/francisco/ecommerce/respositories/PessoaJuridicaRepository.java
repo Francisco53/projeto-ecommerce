@@ -46,17 +46,4 @@ public class PessoaJuridicaRepository {
         return query.getResultList();
     }
 
-    public PessoaJuridica findIdByRazaoSocial(String nome) {
-        String jpql = "SELECT p FROM PessoaJuridica p WHERE p.razaoSocial = :nome";
-        TypedQuery<PessoaJuridica> query = em.createQuery(jpql, PessoaJuridica.class);
-        query.setParameter("nome", nome);
-        try {
-            return query.getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
-    }
-
-
-
 }

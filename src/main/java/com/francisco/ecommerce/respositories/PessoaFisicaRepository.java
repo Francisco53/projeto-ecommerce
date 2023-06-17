@@ -39,15 +39,11 @@ public class PessoaFisicaRepository {
     }
 
 
-    public PessoaFisica findIdByNome(String nome) {
-        String jpql = "SELECT p FROM PessoaFisica p WHERE p.nome = :nome";
-        TypedQuery<PessoaFisica> query = em.createQuery(jpql, PessoaFisica.class);
-        query.setParameter("nome", nome);
-        try {
-            return query.getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
+    public List<PessoaFisica> findPessoaFisicaByNome(String nome) {
+        TypedQuery<PessoaFisica> query =
+                em.createQuery("SELECT p FROM PessoaFisica p WHERE p.nome LIKE :nomepesquisa", PessoaFisica.class);
+        query.setParameter("nomepesquisa", "%"+nome+"%");
+        return query.getResultList();
     }
 
 

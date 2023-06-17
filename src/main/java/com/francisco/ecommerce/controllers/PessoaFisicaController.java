@@ -74,4 +74,11 @@ public class PessoaFisicaController {
         return new ModelAndView("redirect:/pessoasFisicas/list");
     }
 
+    @GetMapping("/pesquisarpessoafisica")
+    public ModelAndView pesquisarPessoaJuridica(@RequestParam("nomepesquisa") String nomepesquisa, ModelMap model) {
+        List<PessoaFisica> pessoaFisicas = repository.findPessoaFisicaByNome(nomepesquisa);
+        model.addAttribute("pessoas", pessoaFisicas);
+        return new ModelAndView("/pessoaFisica/list-pessoa-fisica", model);
+    }
+
 }
