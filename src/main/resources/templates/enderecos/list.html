@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html th:replace="~{/fragments/layout :: layout(~{::head},~{::main})}">
+
+
+<head th:replace="fragments/head.html :: head('Enderecos')"></head>
+
+
+<body>
+
+<main>
+    <div class="container my-2">
+
+
+        <table class="table" border="1">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>CEP</th>
+                <th>Logradouro</th>
+                <th>Bairro</th>
+                <th>Cidade</th>
+                <th colspan="3">Opções</th>
+            </tr>
+
+            </thead>
+            <tr th:each="p : ${enderecos}">
+                <td th:text="${p.id}"></td>
+                <td th:text="${p.cep}"></td>
+                <td th:text="${p.logradouro}"></td>
+                <td th:text="${p.bairro}"></td>
+                <td th:text="${p.localidade}"></td>
+                <td><a th:href="@{/enderecos/edit/{id}(id=${p.id})}" class="btn btn-success" >Editar</a></td>
+                <td><a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"
+                       th:href="@{/enderecos/remove/{id}(id=${p.id})}" class="btn btn-danger" >Excluir</a></td>
+                <td>
+            </tr>
+        </table>
+
+        <a th:href="@{/vendas/carrinho/list}" class="btn btn-info">Ver carrinho</a>
+
+    </div>
+</main>
+
+</body>
+</html>

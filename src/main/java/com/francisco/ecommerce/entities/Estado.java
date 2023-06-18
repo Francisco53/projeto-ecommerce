@@ -12,7 +12,7 @@ public class Estado {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private String sigla;
+    private String uf;
 
     @OneToMany
     private List<Cidade> cidades = new ArrayList<>();
@@ -23,8 +23,8 @@ public class Estado {
         return nome;
     }
 
-    public String getSigla() {
-        return sigla;
+    public String getUf() {
+        return uf;
     }
 
     public Long getId() {

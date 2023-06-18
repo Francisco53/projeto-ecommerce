@@ -8,22 +8,32 @@ public class Cidade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
 
-    @OneToOne
-    private Endereco endereco;
+    private String localidade;
+
+    //@OneToOne
+    //private Endereco endereco;
 
     @ManyToOne
     private Estado estado;
 
 
 
-    public String getNome() {
-        return nome;
+    public String getLocalidade() {
+        return localidade;
+    }
+
+    public void setLocalidade(String localidade) {
+        this.localidade = localidade;
     }
 
     public Estado getEstado() {
         return estado;
+    }
+
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
 
     public Long getId() {

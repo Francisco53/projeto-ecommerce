@@ -31,6 +31,9 @@ public abstract class Pessoa {
     @JoinColumn(name = "pessoa_id")
     private List<Venda> vendas  = new ArrayList<>();
 
+    @ManyToOne
+    private  Endereco endereco;
+
 
 
     public Pessoa() {
@@ -69,5 +72,13 @@ public abstract class Pessoa {
 
     public List<Venda> getVendas() {
         return vendas;
+    }
+
+    public Endereco getEnderecos() {
+        return endereco;
+    }
+
+    public void setEnderecos(Endereco endereco) {
+        this.endereco = endereco;
     }
 }
