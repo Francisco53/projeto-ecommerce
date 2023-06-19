@@ -20,8 +20,9 @@ public class PessoaFisicaRepository {
         return query.getResultList();
     }
 
-    public void salvar(PessoaFisica pessoaFisica) {
+    public PessoaFisica salvar(PessoaFisica pessoaFisica) {
         em.persist(pessoaFisica);
+        return pessoaFisica;
     }
 
 

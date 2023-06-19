@@ -1,6 +1,5 @@
 package com.francisco.ecommerce.entities;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -16,6 +15,10 @@ public class PessoaFisica extends Pessoa {
     @NotNull(message = "Nome é obrigatório")
     private String nome;
 
+    @ManyToOne
+    private Endereco endereco;
+
+
     public PessoaFisica(){
 
     }
@@ -23,7 +26,13 @@ public class PessoaFisica extends Pessoa {
 
 
     public PessoaFisica(Long id, String email, String telefone, String cpf, String nome) {
-        super(id, email, telefone);
+        super(id, email, telefone );
+        this.cpf = cpf;
+        this.nome = nome;
+    }
+
+    public PessoaFisica(Long id, String email, String telefone, Endereco endereco, String cpf, String nome) {
+        super(id, email, telefone, endereco);
         this.cpf = cpf;
         this.nome = nome;
     }
@@ -42,5 +51,13 @@ public class PessoaFisica extends Pessoa {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }

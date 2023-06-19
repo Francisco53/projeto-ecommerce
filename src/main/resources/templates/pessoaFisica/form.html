@@ -43,27 +43,32 @@
                     <p th:errors="*{telefone}"></p>
                 </div>
             </div>
-            <!--
+            <h2>Endereço</h2>
+
             <div class="col-md-6">
                 <label class="form-label">Cep:</label>
-                <input name="cep" type="text" id="cep" value="" size="30" maxlength="9" onblur="pesquisacep(this.value);" class="form-control">
+                <input th:field="${endereco.cep}" type="text" id="cep" value="" size="30" maxlength="9" onblur="pesquisacep(this.value);"
+                       class="form-control">
             </div>
+
             <div class="col-md-6">
                 <label class="form-label">Rua:</label>
-                <input name="rua" type="text" id="rua" size="40" class="form-control">
+                <input th:field="${endereco.logradouro}" type="text" id="rua" size="40" class="form-control">
             </div>
+
             <div class="col-md-6">
                 <label class="form-label">Bairro:</label>
-                <input name="bairro" type="text" id="bairro" size="40" class="form-control">
+                <input th:field="${endereco.bairro}" type="text" id="bairro" size="40" class="form-control">
             </div>
             <div class="col-md-6">
                 <label class="form-label">Cidade:</label>
-                <input name="cidade" type="text" id="cidade" size="40" class="form-control">
+                <input th:field="${endereco.localidade}" type="text" id="cidade" size="40" class="form-control">
             </div>
             <div class="col-md-6">
                 <label class="form-label">Estado:</label>
-                <input name="uf" type="text" id="uf" size="2" class="form-control">
-            </div>-->
+                <input th:field="${endereco.uf}" type="text" id="uf" size="2" class="form-control">
+                <input type="submit" class="btn btn-success my-2" value="Enviar">
+            </div>
 
             <div class="col-12">
                 <div class="form-check form-check-block">

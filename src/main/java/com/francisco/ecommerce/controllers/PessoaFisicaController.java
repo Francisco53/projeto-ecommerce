@@ -1,8 +1,10 @@
 package com.francisco.ecommerce.controllers;
 
+import com.francisco.ecommerce.entities.Endereco;
 import com.francisco.ecommerce.entities.Pessoa;
 import com.francisco.ecommerce.entities.PessoaFisica;
 import com.francisco.ecommerce.entities.PessoaJuridica;
+import com.francisco.ecommerce.respositories.EnderecoRepository;
 import com.francisco.ecommerce.respositories.PessoaFisicaRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ public class PessoaFisicaController {
     @Autowired
     PessoaFisicaRepository repository;
 
+    @Autowired
+    EnderecoRepository enderecoRepository;
+
     @GetMapping("/list")
     public String listar(Model model){
         List<PessoaFisica> pessoaFisicas = repository.pessoaFisicas();
@@ -34,12 +39,14 @@ public class PessoaFisicaController {
     }
 
     @GetMapping("/form")
-    public String form(PessoaFisica pessoaFisica){
+    public String form(PessoaFisica pessoaFisica, Model model){
+        //model.addAttribute("enderecos", pessoaFisica.getEnderecos());
+        model.addAttribute("endereco", new Endereco());
         return "/pessoaFisica/form";
     }
 
     @PostMapping("/save")
-    public ModelAndView salvar(@Valid PessoaFisica pessoaFisica, BindingResult bindingResult, ModelMap model) {
+    public ModelAndView salvar(@Valid PessoaFisica pessoaFisica, Endereco endereco, BindingResult bindingResult, ModelMap model) {
         if (bindingResult.hasErrors()){
 
             ModelAndView modelAndView = new ModelAndView();
@@ -52,7 +59,20 @@ public class PessoaFisicaController {
             return new ModelAndView("/pessoaFisica/form", model);
         }
 
+        endereco = enderecoRepository.save(endereco); // Salva o endereço no banco de dados
+
+
+        pessoaFisica.setEndereco(endereco);
         repository.salvar(pessoaFisica);
+
+        //endereco = enderecoRepository.save(endereco);
+        //pessoaFisica.setEndereco(endereco);
+        //repository.salvar(pessoaFisica);
+
+        //repository.salvar(pessoaFisica);
+        //enderecoRepository.save(endereco);
+        //pessoaFisica.setEndereco(enderecoRepository.findById(endereco.getId()));
+
         return new ModelAndView("redirect:/pessoasFisicas/list");
     }
 

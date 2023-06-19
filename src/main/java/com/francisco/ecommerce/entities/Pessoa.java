@@ -46,6 +46,13 @@ public abstract class Pessoa {
         this.telefone = telefone;
     }
 
+    public Pessoa(Long id, String email, String telefone, Endereco endereco) {
+        this.id = id;
+        this.email = email;
+        this.telefone = telefone;
+        this.endereco = endereco;
+    }
+
     public Long getId() {
         return id;
     }
@@ -74,11 +81,7 @@ public abstract class Pessoa {
         return vendas;
     }
 
-    public Endereco getEnderecos() {
+    public Endereco getEndereco() {
         return endereco;
-    }
-
-    public void setEnderecos(Endereco endereco) {
-        this.endereco = endereco;
     }
 }
